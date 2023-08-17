@@ -1,0 +1,41 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.board {
+    border-collapse: collapse;
+    height: 40%;
+    width: 40%;
+}
+
+.square {
+    border: 2px solid white;
+    padding: 2px;
+}
+
+.content {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filled {
+    background-color: white;
+    color: black;
+    border: 2px solid gold;
+    padding: 2px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
