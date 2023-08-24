@@ -31,16 +31,15 @@ const PromptsView = (props) => {
                 };
                 setErrors(errorArr);
             };
-        }
-        
-    }
+        };
+    };
     const removeFromDOM = async (promptId) => {
         try {
             const res = await axios.delete('http://localhost:8000/api/prompts/' + promptId);
             setPrompts(prompts.filter(prompt => prompt._id != promptId));
         } catch(err) {
             console.log(err);
-        }
+        };
     };
     return (
         <>

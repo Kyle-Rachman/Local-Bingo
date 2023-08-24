@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from './Board.module.css';
 import { Link } from "react-router-dom";
 import Square from "./Square";
+import LogoutButton from "../LogoutButton";
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -69,6 +70,7 @@ const Board = (props) => {
             <div className={styles.buttons}>
                 <button onClick={() => setLoaded(false)}>Reload Board</button>
                 <Link to={"/prompts"}>Add/Edit Squares</Link>
+                <LogoutButton></LogoutButton>
             </div>
         </div>
     );
