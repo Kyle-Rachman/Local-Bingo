@@ -12,6 +12,7 @@ const Home = (props) => {
             const res = await axios.post('http://localhost:8000/api/users/register', userParam, {withCredentials: true});
             setRegisterErrors([]);
         } catch(err) {
+            console.log(err)
             if (typeof err.response.data == "string") {
                 setRegisterErrors(["This user already exists!"]);
             } else{

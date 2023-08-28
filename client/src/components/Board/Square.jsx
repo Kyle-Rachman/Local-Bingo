@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from './Board.module.css';
+import styles from './Square.module.css';
 
 const Square = (props) => {
     const {text, isLoaded} = props;
@@ -16,8 +16,9 @@ const Square = (props) => {
 
     return (
         <td
-            className={active ? `${styles.filled}`: `${styles.square}`}
-            onClick={toggleActive}>
+            className={active ? `${styles.filled}`: ``}
+            onClick={toggleActive}
+            onMouseMove={(e)=> handleMouseMove(e)}>
             <div className={styles.content}>{text}</div>
         </td>
     );

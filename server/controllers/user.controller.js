@@ -3,17 +3,16 @@ const User = require('../models/user.model');
 // Create Commands for User
 
 const registerUser = (req, res) => {
-    // User.exists({
-    //     firstName: req.body.firstName,
-    //     lastInitial: req.body.lastInitial
-    // })
-    // .then( userExists => {
-    //     if (userExists) {
-    //         return Promise.reject('This user already exists!')
-    //     }
-    //     return User.create(req.body);
-    // })
-    User.create(req.body)
+    User.exists({
+        firstName: req.body.firstName,
+        lastInitial: req.body.lastInitial
+    })
+    .then( userExists => {
+        if (userExists) {
+            return Promise.reject('This user already exists!')
+        }
+        return User.create(req.body);
+    })
     .then(user => {
         const userToken = jwt.sign({
             id: user._id
