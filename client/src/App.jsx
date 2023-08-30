@@ -13,6 +13,9 @@ function App() {
           <Route exact path='/' element={<Home />}></Route>
           <Route exact path='/game' element={<Board />}></Route>
           <Route exact path='/prompts' element={<PromptsView />}></Route>
+          <Route exact path='/profile/:_id' element={<p>To become a profile page</p>}></Route>
+          <Route exact path='/profile/:_id/edit' element={<p>To become a profile editing page</p>}></Route>
+          <Route exact path='/leaderboard' element={<p>To become a leaderboard</p>}></Route>
         </Routes>
       </BrowserRouter>
     </>
