@@ -3,6 +3,8 @@ import PromptForm from "../components/PromptForm";
 import PromptList from "../components/PromptList";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton";
+import styles from "./PromptsView.module.css";
 
 const PromptsView = (props) => {
     const [prompts, setPrompts] = useState([]);
@@ -43,6 +45,9 @@ const PromptsView = (props) => {
     };
     return (
         <>
+            <div className={styles.header}>
+                <LogoutButton></LogoutButton>
+            </div>
             <h2>Add a Square!</h2>
             <PromptForm onSubmitProp={createPrompt} initialText=""/>
             <div className="errors">
