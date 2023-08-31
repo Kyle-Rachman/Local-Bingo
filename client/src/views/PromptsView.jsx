@@ -4,7 +4,6 @@ import PromptList from "../components/PromptList";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import LogoutButton from "../components/LogoutButton";
-import styles from "./PromptsView.module.css";
 
 const PromptsView = (props) => {
     const [prompts, setPrompts] = useState([]);
@@ -45,7 +44,7 @@ const PromptsView = (props) => {
     };
     return (
         <>
-            <div className={styles.header}>
+            <div style={{textAlign: "right"}}>
                 <LogoutButton></LogoutButton>
             </div>
             <h2>Add a Square!</h2>

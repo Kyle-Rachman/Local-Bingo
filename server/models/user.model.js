@@ -14,6 +14,23 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password is required"]
+    },
+    numBingos: {
+        type: Number,
+        default: 0
+    },
+    lastWin: {
+        type: Date,
+        default: "2000-01-01"
+    },
+    funFact: {
+        type: String,
+        default: ""
+    },
+    role: {
+        type: String,
+        enum: ["User", "Prompt Manager", "Admin"],
+        default: "User"
     }
 }, {timestamps: true});
 

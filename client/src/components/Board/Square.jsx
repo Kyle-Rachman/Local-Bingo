@@ -7,7 +7,7 @@ const Square = (props) => {
     useEffect(() => setActive(isActive), [isActive]);
 
     return (
-        <td
+        <td id={styles.bingoSquare}
             className={active ? `${styles.filled}`: ``}
             onClick={handleClick}>
             <div className={styles.content}>{text}</div>

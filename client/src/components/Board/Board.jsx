@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from './Board.module.css';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Square from "./Square";
 import LogoutButton from "../LogoutButton";
 
@@ -36,6 +36,7 @@ const Board = (props) => {
         [0,0,0,0,0],
         [0,0,0,0,0],
         [0,0,0,0,0]]);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchPrompts = async () => {
             const res = await axios.get('http://localhost:8000/api/prompts');
@@ -118,7 +119,8 @@ const Board = (props) => {
             </table>
             <div className={styles.buttons}>
                 <button onClick={() => setLoaded(false)}>Reload Board</button>
-                <Link to={"/prompts"}>Add/Edit Squares</Link>
+                <button onClick={() => navigate('/prompts')}>Add/Edit Squares</button>
+                <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
                 <LogoutButton></LogoutButton>
             </div>
             <div className="Bingo">
