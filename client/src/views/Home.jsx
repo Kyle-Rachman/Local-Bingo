@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
     const [registerErrors, setRegisterErrors] = useState([]);
-    const [loginErrors, setLoginErrors] = useState([]);
+    const [loginError, setLoginError] = useState("");
     const navigate = useNavigate();
     const registerUser = async (userParam) => {
         try {
             const res = await axios.post('http://localhost:8000/api/users/register', userParam, {withCredentials: true});
             setRegisterErrors([]);
+            navigate('/game');
         } catch(err) {
-            console.log(err)
-            if (typeof err.response.data == "string") {
+            if (err.response.data.message) {
                 setRegisterErrors(["This user already exists!"]);
             } else{
                 let errorArr = []
@@ -28,29 +28,28 @@ const Home = (props) => {
     const loginUser = async (userParam) => {
         try {
             const res = await axios.post('http://localhost:8000/api/users/login', userParam, {withCredentials: true});
-            setLoginErrors([]);
+            setLoginError("");
             navigate('/game');
         } catch(err) {
-            let errorArr = []
-                for (var key in err.response.data.errors) {
-                    errorArr.push(err.response.data.errors[key].message);
-                };
-                setLoginErrors(errorArr);
+            if (err.response.data.message) {
+                setLoginError("Invalid login attempt!");
+            }
         };
     };
     return (
         <>
+            <h2>Register</h2>
             <UserForm onSubmitProp={registerUser} type="register"/>
             <div className="errors">
                 {registerErrors.map((err, index) => (
                         <p key={index}>{err}</p>
                     ))}
             </div>
+            <hr />
+            <h2>Login</h2>
             <UserForm onSubmitProp={loginUser} type="login"/>
             <div className="errors">
-                {loginErrors.map((err, index) => (
-                        <p key={index}>{err}</p>
-                    ))}
+                <p>{loginError}</p>
             </div>
         </>
     );

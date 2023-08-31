@@ -1,14 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
-UserSchema.pre('save', function(next) {
-    bcrypt.hash(this.password, 10)
-    .then(hash => {
-        this.password = hash;
-        next();
-    });
-});
-
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -16,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     },
     lastInitial: {
         type: String,
-        required: [true, "Last name is required"],
+        required: [true, "Last initial is required"],
         maxLength: [2, "Just the initial! You can add another character to help distinguish people if necessary."]
     },
     password: {
@@ -25,10 +17,23 @@ const UserSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
+UserSchema.pre('save', async function(next) {
+    try {
+        const hash = await bcrypt.hash(this.password, 10);
+        this.password = hash;
+        next();
+    } catch (error) {
+        return next(error);
+    }
+});
 
 UserSchema.virtual('confirmPassword')
-    .get( () => this._confirmPassword )
-    .set( value => this._confirmPassword = value );
+    .get(function() {
+        return this._confirmPassword;
+    })
+    .set(function(value) {
+        this._confirmPassword = value;
+    });
 
 UserSchema.pre('validate', function(next) {
     if (this.password !== this.confirmPassword) {
