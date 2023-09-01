@@ -8,9 +8,9 @@ const Leaderboard = (props) => {
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUsers = async () => {
-            const res = await axios.get('http://localhost:8000/api/users');
+            const res = await axios.get('http://localhost:8000/api/users', {}, {withCredentials: true});
             const data = await res.data;
-            setUsers(data);
+            setUsers(data.filter(user => user.firstName != "Admin"));
         }
         fetchUsers().catch((err) => console.log(err));
     }, []);

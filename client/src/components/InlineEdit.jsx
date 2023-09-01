@@ -20,7 +20,7 @@ const InlineEdit = (props) => {
     const {initialValue, promptId} = props;
     const [text, setText] = useState(initialValue);
     const editPrompt = (promptText) => {
-        axios.patch('http://localhost:8000/api/prompts/' + promptId, promptText)
+        axios.patch('http://localhost:8000/api/prompts/' + promptId, promptText, {withCredentials: true})
             .catch(err => console.log(err));
     };
     useEffect(() => {

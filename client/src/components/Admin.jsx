@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import DeleteButton from "./DeleteButton";
 
 const Admin = (props) => {
     const [users, setUsers] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const navigate = useNavigate();
     useEffect(() => {
         const fetchUsers = async () => {
-            const res = await axios.get('http://localhost:8000/api/users');
+            const res = await axios.get('http://localhost:8000/api/users', {}, {withCredentials: true});
             const data = await res.data;
             setUsers(data);
             setLoaded(true)
@@ -29,9 +28,11 @@ const Admin = (props) => {
     const changeUserRole = async (roleType, _id) => {
         try {
             if (roleType == "User") {
-                const res = await axios.patch('http://localhost:8000/api/users/' + _id, {role: "Prompt Manager"});
+                const res = await axios.patch('http://localhost:8000/api/users/' + _id, {role: "Prompt Manager"}, {withCredentials: true});
+            } else if (roleType == "Prompt Manager") {
+                const res = await axios.patch('http://localhost:8000/api/users/' + _id, {role: "User"}, {withCredentials: true});
             } else {
-                const res = await axios.patch('http://localhost:8000/api/users/' + _id, {role: "User"});
+                console.log("You can't change an admin's role! Silly goose.")
             }
             setLoaded(false);
         } catch (err) {
@@ -41,9 +42,6 @@ const Admin = (props) => {
 
     return (
         <>
-            <div style={{textAlign: "right"}}>
-                <LogoutButton></LogoutButton>
-            </div>
             <h1>Admin Console:</h1>
             <table>
                 <thead>
@@ -70,7 +68,11 @@ const Admin = (props) => {
                                             "Demote"
                                         }
                                     </button>
-                                    <DeleteButton itemId={user._id} type={"users"} successCallback={() => removeFromDOM(user._id)}/>
+                                    {
+                                        (user.role != "Admin") ?
+                                        <DeleteButton itemId={user._id} type={"users"} successCallback={() => removeFromDOM(user._id)}/> :
+                                        ""
+                                    }
                                 </td>
                             </tr>
                         );
@@ -79,7 +81,7 @@ const Admin = (props) => {
                 </tbody>
             </table>
             <div className="buttons">
-                <button onClick={() => navigate('/game')}>Back to Game</button>
+                <LogoutButton></LogoutButton>
             </div>
         </>
     );

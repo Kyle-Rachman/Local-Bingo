@@ -18,7 +18,7 @@ const PromptsView = (props) => {
     }, []);
     const createPrompt = async (promptParam) => {
         try {
-            const res = await axios.post('http://localhost:8000/api/prompts/new', promptParam);
+            const res = await axios.post('http://localhost:8000/api/prompts/new', promptParam, {withCredentials: true});
             const data = await res.data;
             setErrors([]);
             setPrompts([...prompts, data]);

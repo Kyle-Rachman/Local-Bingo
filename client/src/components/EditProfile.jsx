@@ -12,7 +12,7 @@ const EditProfile = (props) => {
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUserInfo = async () => {
-            const res = await axios.get('http://localhost:8000/api/users/' + _id);
+            const res = await axios.get('http://localhost:8000/api/users/' + _id, {}, {withCredentials: true});
             const data = await res.data;
             setFirstName(data.firstName);
             setLastInitial(data.lastInitial);
@@ -32,7 +32,7 @@ const EditProfile = (props) => {
 
     const updateUser = async (userParam) => {
         try {
-            const res = await axios.patch('http://localhost:8000/api/users/' + _id, userParam);
+            const res = await axios.patch('http://localhost:8000/api/users/' + _id, userParam, {withCredentials: true});
             navigate("/profile/" + _id);
         } catch (err) {
             let errorArr = []
