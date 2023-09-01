@@ -2,17 +2,17 @@ import React from "react";
 import axios from "axios";
 
 const DeleteButton = (props) => {
-    const {promptId, successCallback} = props;
-    const deletePrompt = async (e) => {
+    const {itemId, type, successCallback} = props;
+    const deleteItem = async (e) => {
         try {
-            const res = await axios.delete('http://localhost:8000/api/prompts/' + promptId);
+            const res = await axios.delete('http://localhost:8000/api/' + type + '/' + itemId);
             successCallback();
         } catch(err) {
             console.log(err)
         }
     };
     return (
-        <button onClick={deletePrompt}>Delete</button>
+        <button onClick={deleteItem}>Delete</button>
     );
 };
 

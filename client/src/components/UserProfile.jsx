@@ -6,7 +6,7 @@ import LogoutButton from "./LogoutButton";
 const UserProfile = (props) => {
     const {_id} = useParams();
     const [user, setUser] = useState({});
-    const date = new Date(user.lastWin)
+    const date = new Date(user.lastWin);
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUser = async () => {
@@ -35,12 +35,17 @@ const UserProfile = (props) => {
                     </tr>
                     <tr>
                         <th>Fun Fact</th>
-                        <td>{user.funFact}</td>
+                        <td>{
+                            user.funFact ?
+                            user.funFact :
+                            "No fun fact found"
+                        }</td>
                     </tr>
                 </tbody>
             </table>
             <div className="buttons">
                 <button onClick={() => navigate('/game')}>Back to Game</button>
+                <button onClick={() => navigate('/profile/' + _id + '/edit')}>Edit Profile</button>
                 <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
             </div>
         </>

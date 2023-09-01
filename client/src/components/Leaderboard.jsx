@@ -34,7 +34,7 @@ const Leaderboard = (props) => {
                     users.map(user => {
                         const date = new Date(user.lastWin)
                         return (
-                            <tr key = {prompt._id}>
+                            <tr key = {user._id}>
                                 <td><Link to={"/profile/"+user._id}> {user.firstName} {user.lastInitial}</Link></td>
                                 <td>{user.numBingos}</td>
                                 <td>{date.getUTCMonth()+1}/{date.getUTCDate()}/{date.getUTCFullYear()}</td>
