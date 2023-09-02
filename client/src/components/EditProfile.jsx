@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import UserContext from "../UserContext";
 
 const EditProfile = (props) => {
     const {_id} = useParams();
@@ -9,6 +10,7 @@ const EditProfile = (props) => {
     const [funFact, setFunFact] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [errors, setErrors] = useState([]);
+    const {currentUser, setCurrentUser} = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -18,6 +20,9 @@ const EditProfile = (props) => {
             setLastInitial(data.lastInitial);
             setFunFact(data.funFact);
             setLoaded(true);
+            if (currentUser.id != _id) {
+                navigate(-1)
+            }
         }
         fetchUserInfo().catch((err) => console.log(err));
     }, [loaded]);
@@ -63,6 +68,7 @@ const EditProfile = (props) => {
                     </div>
                     <div className="formInput">
                         <button type="submit">Submit</button>
+                        <button onClick={() => navigate("/profile/" + _id)}>Cancel</button>
                     </div>
                 </form>
             }

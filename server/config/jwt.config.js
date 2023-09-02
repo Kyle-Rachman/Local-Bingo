@@ -5,10 +5,8 @@ module.exports.authenticate = (req, res, next) => {
     const token = req.cookies["usertoken"];
     try {
         const data = jwt.verify(token, secret);
-        req.userId = data._id;
-        req.userRole = data.role;
-        return next()
+        return next();
     } catch {
-        return res.status(401).json({verified: false})
-    }
-}
+        return res.status(401).json({verified: false});
+    };
+};

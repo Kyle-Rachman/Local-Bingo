@@ -5,7 +5,7 @@ const DeleteButton = (props) => {
     const {itemId, type, successCallback} = props;
     const deleteItem = async (e) => {
         try {
-            const res = await axios.delete('http://localhost:8000/api/' + type + '/' + itemId, {}, {withCredentials: true});
+            const res = await axios.delete('http://localhost:8000/api/' + type + '/' + itemId, {withCredentials: true});
             successCallback();
         } catch(err) {
             console.log(err)

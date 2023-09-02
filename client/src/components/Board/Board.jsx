@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from './Board.module.css';
 import { useNavigate } from "react-router-dom";
 import Square from "./Square";
 import LogoutButton from "../LogoutButton";
+import UserContext from "../../UserContext";
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -36,6 +37,7 @@ const Board = (props) => {
         [0,0,0,0,0],
         [0,0,0,0,0],
         [0,0,0,0,0]]);
+    const {currentUser, setCurrentUser} = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
         const fetchPrompts = async () => {
@@ -119,8 +121,13 @@ const Board = (props) => {
             </table>
             <div className={styles.buttons}>
                 <button onClick={() => setLoaded(false)}>Reload Board</button>
-                <button onClick={() => navigate('/prompts')}>Add/Edit Squares</button>
+                <button onClick={() => navigate('/prompts')}>Square List</button>
                 <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
+                {
+                    currentUser.id != 0 ?
+                    <button onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</button> :
+                    ""
+                }
                 <LogoutButton></LogoutButton>
             </div>
             <div className="Bingo">

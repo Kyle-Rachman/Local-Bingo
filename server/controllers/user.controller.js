@@ -90,7 +90,7 @@ const login = async (req, res) => {
             if (passwordMatch) {
                 const userToken = jwt.sign({
                     id: user._id
-                }, process.env.SECRET_KEY); // can add {expiresIn: "2h"} make this expire in 2h or later with "7d" or "24h"
+                }, process.env.SECRET_KEY, {expiresIn: "24h"}); // can make this later with "7d" or "24h"
                 res.cookie("usertoken", userToken, {httpOnly: true}).json({
                     message: "Login successful!",
                     user: user

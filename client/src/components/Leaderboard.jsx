@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import UserContext from "../UserContext";
 
 const Leaderboard = (props) => {
     const [users, setUsers] = useState([]);
+    const {currentUser, setCurrentUser} = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUsers = async () => {
@@ -46,6 +48,11 @@ const Leaderboard = (props) => {
             </table>
             <div className="buttons">
                 <button onClick={() => navigate('/game')}>Back to Game</button>
+                {
+                    currentUser.id != 0 ?
+                    <button onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</button> :
+                    ""
+                }
             </div>
         </>
     );

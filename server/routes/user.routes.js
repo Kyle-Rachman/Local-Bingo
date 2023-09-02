@@ -6,7 +6,7 @@ module.exports = app => {
     app.get('/api/users/:id', UserController.findUser);
     app.patch('/api/users/:id', authenticate, UserController.updateExistingUser);
     app.delete('/api/users/:id', authenticate, UserController.deleteUser);
-    app.post('/api/users/register', authenticate, UserController.registerUser);
-    app.post('/api/users/login', authenticate, UserController.login);
-    app.post('/api/users/logout', authenticate, UserController.logout);
+    app.post('/api/users/register', UserController.registerUser);
+    app.post('/api/users/login', UserController.login);
+    app.post('/api/users/logout', UserController.logout);
 };

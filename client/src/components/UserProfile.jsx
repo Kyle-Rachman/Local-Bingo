@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import UserContext from "../UserContext";
 
 const UserProfile = (props) => {
     const {_id} = useParams();
     const [user, setUser] = useState({});
+    const {currentUser, setCurrentUser} = useContext(UserContext);
     const date = new Date(user.lastWin);
     const navigate = useNavigate();
     useEffect(() => {
@@ -45,8 +47,19 @@ const UserProfile = (props) => {
             </table>
             <div className="buttons">
                 <button onClick={() => navigate('/game')}>Back to Game</button>
-                <button onClick={() => navigate('/profile/' + _id + '/edit')}>Edit Profile</button>
+                {
+                    currentUser.id == user._id ?
+                    <button onClick={() => navigate('/profile/' + _id + '/edit')}>Edit Profile</button> :
+                    ""
+                }
                 <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
+            </div>
+            <div>
+            {
+                currentUser.role == "Admin" ?
+                <button onClick={() => navigate('/admin')}>Admin Console</button> :
+                ""
+                }
             </div>
         </>
     );

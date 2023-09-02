@@ -1,19 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import DeleteButton from "./DeleteButton";
+import UserContext from "../UserContext";
 
 const Admin = (props) => {
     const [users, setUsers] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const {currentUser, setCurrentUser} = useContext(UserContext);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchUsers = async () => {
             const res = await axios.get('http://localhost:8000/api/users', {}, {withCredentials: true});
             const data = await res.data;
+            if (currentUser.role != "Admin") {
+                const logout = await axios.post('http://localhost:8000/api/users/logout', {}, {withCredentials: true});
+                setCurrentUser({
+                    id: 0,
+                    role: "User"
+                });
+                navigate("/");
+            }
             setUsers(data);
-            setLoaded(true)
-        }
+            setLoaded(true);
+        };
         fetchUsers().catch((err) => console.log(err));
     }, [loaded]);
 
