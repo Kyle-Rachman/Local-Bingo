@@ -46,15 +46,37 @@ const Admin = (props) => {
         };
     };
 
+    const sortUsers = async (field, direction) => {
+        try {
+            const res = await axios.get('http://localhost:8000/api/users/sorted/' + field + '/' + direction);
+            const data = await res.data;
+            setUsers(data);
+        } catch (err) {
+            console.log(err);
+        };
+    };
+
     return (
         <>
             <h1>Admin Console:</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of Bingos</th>
-                        <th>Role</th>
+                        <th>
+                            Name
+                            <button onClick={() => sortUsers("firstName","")}>Asc</button>
+                            <button onClick={() => sortUsers("firstName","-")}>Dsc</button>
+                        </th>
+                        <th>
+                            Number of Bingos
+                            <button onClick={() => sortUsers("numBingos","")}>Asc</button>
+                            <button onClick={() => sortUsers("numBingos","-")}>Dsc</button>
+                        </th>
+                        <th>
+                            Role
+                            <button onClick={() => sortUsers("role","")}>Asc</button>
+                            <button onClick={() => sortUsers("role","-")}>Dsc</button>
+                        </th>
                         <th>Actions</th>
                     </tr>
                 </thead>

@@ -40,6 +40,20 @@ const findAllUsers = (req, res) => {
         .catch((err) => res.status(400).json(err));
 };
 
+const findAllUsersSorted = (req, res) => {
+    const field = req.params.field;
+    if (req.params.direction) {
+        var direction = req.params.direction;
+    } else {
+        var direction = "";
+    };
+    User.find().sort(`${direction}` + `${field}`)
+        .then((allUsers) => {
+            res.json(allUsers)
+        })
+        .catch((err) => res.status(400).json(err));
+};
+
 const findUser = (req, res) => {
     User.exists({ _id: req.params.id })
     .then( userExists => {
@@ -91,7 +105,7 @@ const login = async (req, res) => {
             if (passwordMatch) {
                 const userToken = jwt.sign({
                     id: foundUser._id
-                }, process.env.SECRET_KEY, {expiresIn: "24h"}); // can make this later with "7d" or such
+                }, process.env.SECRET_KEY, {expiresIn: "2h"}); // can make this later with "7d" or such
                 const result = await User.findOneAndUpdate({ _id: foundUser.id }, {userToken: userToken});
                 res.cookie("usertoken", userToken, {httpOnly: true}).json({
                     message: "Login successful!",
@@ -121,6 +135,7 @@ const logout = (req, res) => {
 module.exports = {
     registerUser,
     findAllUsers,
+    findAllUsersSorted,
     findUser,
     updateExistingUser,
     deleteUser,

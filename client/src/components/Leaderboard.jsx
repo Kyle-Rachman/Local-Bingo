@@ -17,6 +17,16 @@ const Leaderboard = (props) => {
         fetchUsers().catch((err) => console.log(err));
     }, []);
 
+    const sortLeaderboard = async (field, direction) => {
+        try {
+            const res = await axios.get('http://localhost:8000/api/users/sorted/' + field + '/' + direction);
+            const data = await res.data;
+            setUsers(data.filter(user => user.firstName != "Admin"));
+        } catch (err) {
+            console.log(err);
+        };
+    };
+
     return (
         <>
             <div style={{textAlign: "right"}}>
@@ -26,9 +36,21 @@ const Leaderboard = (props) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of Bingos</th>
-                        <th>Most Recent Bingo</th>
+                        <th>
+                            Name
+                            <button onClick={() => sortLeaderboard("firstName","")}>Asc</button>
+                            <button onClick={() => sortLeaderboard("firstName","-")}>Dsc</button>
+                        </th>
+                        <th>
+                            Number of Bingos
+                            <button onClick={() => sortLeaderboard("numBingos","")}>Asc</button>
+                            <button onClick={() => sortLeaderboard("numBingos","-")}>Dsc</button>
+                        </th>
+                        <th>
+                            Most Recent Bingo
+                            <button onClick={() => sortLeaderboard("lastWin","")}>Asc</button>
+                            <button onClick={() => sortLeaderboard("lastWin","-")}>Dsc</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody> 
