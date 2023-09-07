@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
         const userToken = jwt.sign({
             id: newUser._id
         }, process.env.SECRET_KEY);
+        const result = await User.findOneAndUpdate({ _id: newUser.id }, {userToken: userToken});
         res.cookie("usertoken", userToken, {httpOnly: true}).json({
             message: "Success!",
             user: newUser
@@ -81,27 +82,28 @@ const deleteUser = (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const user = await User.findOne({
+        const foundUser = await User.findOne({
             firstName: req.body.firstName,
             lastInitial: req.body.lastInitial
         });
-        if (user) {
-            const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (foundUser) {
+            const passwordMatch = await bcrypt.compare(req.body.password, foundUser.password);
             if (passwordMatch) {
                 const userToken = jwt.sign({
-                    id: user._id
-                }, process.env.SECRET_KEY, {expiresIn: "24h"}); // can make this later with "7d" or "24h"
+                    id: foundUser._id
+                }, process.env.SECRET_KEY, {expiresIn: "24h"}); // can make this later with "7d" or such
+                const result = await User.findOneAndUpdate({ _id: foundUser.id }, {userToken: userToken});
                 res.cookie("usertoken", userToken, {httpOnly: true}).json({
                     message: "Login successful!",
-                    user: user
+                    user: foundUser
                 });
             } else {
-                res.status(400).json({
+                res.status(401).json({
                 message: "Invalid login attempt"
                 });
             }
         } else {
-            res.status(400).json({
+            res.status(401).json({
             message: "Invalid login attempt"
             });
         };
@@ -113,7 +115,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
     res.clearCookie('usertoken');
     res.sendStatus(200);
-}
+};
 
 
 module.exports = {

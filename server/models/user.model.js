@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ["User", "Prompt Manager", "Admin"],
         default: "User"
+    },
+    userToken: {
+        type: String,
+        default: ""
     }
 }, {timestamps: true});
 

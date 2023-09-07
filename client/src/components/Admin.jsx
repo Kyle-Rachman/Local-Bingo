@@ -15,12 +15,7 @@ const Admin = (props) => {
             const res = await axios.get('http://localhost:8000/api/users', {}, {withCredentials: true});
             const data = await res.data;
             if (currentUser.role != "Admin") {
-                const logout = await axios.post('http://localhost:8000/api/users/logout', {}, {withCredentials: true});
-                setCurrentUser({
-                    id: 0,
-                    role: "User"
-                });
-                navigate("/");
+                navigate("/game");
             }
             setUsers(data);
             setLoaded(true);

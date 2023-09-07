@@ -57,6 +57,7 @@ const Board = (props) => {
     useEffect(() => {
         if (checkBingo(activeSquares)) {
             setBingo(true);
+            postBingo();
         } else {
             setBingo(false);
         };
@@ -76,7 +77,19 @@ const Board = (props) => {
             boardState[i] = updatedRow;
             setActiveSquares(boardState);
         };
-    }
+    };
+
+    const postBingo = async () => {
+        try {
+            const id = currentUser.id;
+            const res = await axios.get('http://localhost:8000/api/users/' + id, {}, {withCredentials: true});
+            let numBingos = await res.data.numBingos;
+            numBingos += 1
+            const addBingoRes = await axios.patch('http://localhost:8000/api/users/' + id, {numBingos}, {withCredentials: true});
+        } catch (err) {
+            console.log(err);
+        };
+    };
 
     return (
         <div className={styles.container}>
