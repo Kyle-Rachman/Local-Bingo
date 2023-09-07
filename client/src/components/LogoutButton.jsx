@@ -9,9 +9,11 @@ const LogoutButton = (props) => {
     const logoutUser = async (e) => {
         try {
             if (currentUser.id == 0) {
+                localStorage.clear();
                 navigate('/')
             }
             const res = await axios.post('http://localhost:8000/api/users/logout', {}, {withCredentials: true});
+            localStorage.clear();
             setCurrentUser({
                 id: 0,
                 role: "User"

@@ -32,7 +32,7 @@ const Board = (props) => {
     const [loaded, setLoaded] = useState(false);
     const [bingo, setBingo] = useState(false);
     const [displayTooSoon, setDisplayTooSoon] = useState(false);
-    const [activeSquares, setActiveSquares] = useState(
+    const [activeSquares, setActiveSquares] = useState(JSON.parse(localStorage.getItem("boardState")) ||
         [[0,0,0,0,0],
         [0,0,0,0,0],
         [0,0,0,0,0],
@@ -46,12 +46,6 @@ const Board = (props) => {
             const array = await res.data.map((prompt) => prompt.text);
             setPrompts(shuffleArray(array));
             setLoaded(true);
-            setActiveSquares(
-                [[0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]]);
         }
         fetchPrompts().catch((err) => console.log(err));
     }, [loaded]);
@@ -62,6 +56,7 @@ const Board = (props) => {
         } else {
             setBingo(false);
         };
+        localStorage.setItem("boardState", JSON.stringify(activeSquares));
     },[activeSquares])
 
     const toggleActive = (i,j) => {
@@ -144,7 +139,15 @@ const Board = (props) => {
                 </tbody>
             </table>
             <div className={styles.buttons}>
-                <button onClick={() => setLoaded(false)}>Reload Board</button>
+                <button onClick={() => {
+                    setLoaded(false);
+                    setActiveSquares(
+                                    [[0,0,0,0,0],
+                                    [0,0,0,0,0],
+                                    [0,0,0,0,0],
+                                    [0,0,0,0,0],
+                                    [0,0,0,0,0]]);
+                    }}>Reload Board</button>
                 <button onClick={() => navigate('/prompts')}>Square List</button>
                 <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
                 {
