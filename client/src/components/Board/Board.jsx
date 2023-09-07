@@ -31,6 +31,7 @@ const Board = (props) => {
     const [prompts, setPrompts] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const [bingo, setBingo] = useState(false);
+    const [displayTooSoon, setDisplayTooSoon] = useState(false);
     const [activeSquares, setActiveSquares] = useState(
         [[0,0,0,0,0],
         [0,0,0,0,0],
@@ -84,8 +85,18 @@ const Board = (props) => {
             const id = currentUser.id;
             const res = await axios.get('http://localhost:8000/api/users/' + id, {}, {withCredentials: true});
             let numBingos = await res.data.numBingos;
-            numBingos += 1
-            const addBingoRes = await axios.patch('http://localhost:8000/api/users/' + id, {numBingos}, {withCredentials: true});
+            const prevWin = new Date(await res.data.lastWin);
+            const currentDate = new Date();
+            const daysBetweenWins = (currentDate.getTime() - prevWin.getTime()) / (1000 * 3600 * 24);
+            if (Math.ceil(daysBetweenWins) >= 7) {
+                numBingos += 1
+                const lastWin = currentDate.toISOString()
+                const addBingoRes = await axios.patch('http://localhost:8000/api/users/' + id, {numBingos, lastWin}, {withCredentials: true});
+            } else {
+                setBingo(false);
+                setDisplayTooSoon(true);
+                setTimeout(() => setDisplayTooSoon(false), 3000)
+            }
         } catch (err) {
             console.log(err);
         };
@@ -147,6 +158,11 @@ const Board = (props) => {
                 {
                     bingo ?
                     "You got Bingo!" :
+                    ""
+                }
+                {
+                    displayTooSoon ?
+                    "You already got Bingo this week!" :
                     ""
                 }
             </div>
