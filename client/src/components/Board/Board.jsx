@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Square from "./Square";
 import LogoutButton from "../LogoutButton";
 import UserContext from "../../UserContext";
+import { Button } from "@mui/material";
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -118,7 +119,7 @@ const Board = (props) => {
                     <tr>
                         <Square text={prompts[10]} isActive={activeSquares[2][0]} handleClick={() => toggleActive(2,0)}></Square>
                         <Square text={prompts[11]} isActive={activeSquares[2][1]} handleClick={() => toggleActive(2,1)}></Square>
-                        <Square text={"FREE SPACE\nGod is at the center"} isActive={activeSquares[2][2]} handleClick={() => toggleActive(2,2)}></Square>
+                        <Square text={"God is at the center"} isActive={activeSquares[2][2]} handleClick={() => toggleActive(2,2)}></Square>
                         <Square text={prompts[12]} isActive={activeSquares[2][3]} handleClick={() => toggleActive(2,3)}></Square>
                         <Square text={prompts[13]} isActive={activeSquares[2][4]} handleClick={() => toggleActive(2,4)}></Square>
                     </tr>
@@ -139,7 +140,7 @@ const Board = (props) => {
                 </tbody>
             </table>
             <div className={styles.buttons}>
-                <button onClick={() => {
+                <Button variant="outlined" onClick={() => {
                     setLoaded(false);
                     setActiveSquares(
                                     [[0,0,0,0,0],
@@ -147,12 +148,12 @@ const Board = (props) => {
                                     [0,0,0,0,0],
                                     [0,0,0,0,0],
                                     [0,0,0,0,0]]);
-                    }}>Reload Board</button>
-                <button onClick={() => navigate('/prompts')}>Square List</button>
-                <button onClick={() => navigate('/leaderboard')}>Leaderboard</button>
+                    }}>Reload Board</Button>
+                <Button variant="outlined" onClick={() => navigate('/prompts')}>Square List</Button>
+                <Button variant="outlined" onClick={() => navigate('/leaderboard')}>Leaderboard</Button>
                 {
                     currentUser.id != 0 ?
-                    <button onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</button> :
+                    <Button variant="outlined" onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</Button> :
                     ""
                 }
                 <LogoutButton></LogoutButton>

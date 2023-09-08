@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
+import { Button } from "@mui/material";
 
 const LogoutButton = (props) => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const LogoutButton = (props) => {
         };
     };
     return (
-        <button onClick={logoutUser}>Leave</button>
+        <Button variant="outlined" color="warning" onClick={logoutUser}>Leave</Button>
     );
 };
 

@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import PromptsView from './views/PromptsView';
 import Board from './components/Board/Board';
-import Leaderboard from './components/Leaderboard';
+import Leaderboard from './components/Leaderboard/Leaderboard';
 import UserProfile from './components/UserProfile';
 import EditProfile from './components/EditProfile';
 import Admin from './components/Admin';
