@@ -1,8 +1,7 @@
 const User = require('../models/user.model');
-const secret = process.env.SECRET_KEY;
 const jwt = require('jsonwebtoken');
-// Will need this for login funcitonality
 const bcrypt = require('bcrypt');
+
 // Create Commands for User
 
 const registerUser = async (req, res) => {
@@ -73,8 +72,7 @@ const updateExistingUser = (req, res) => {
     .then( userExists => {
         if (userExists) {
             return User.findOneAndUpdate({ _id: req.params.id },
-                req.body, { new: true, runValidators: true }
-                )
+                req.body, { new: true, runValidators: true })
         }
         return Promise.reject('This user does not exist!');
     })
@@ -126,7 +124,18 @@ const login = async (req, res) => {
     };
 }
 
-const logout = (req, res) => {
+const logout = async (req, res) => {
+    try{
+        const token = req.cookies['usertoken'];
+        const leavingUser = await User.findOne({userToken: token})
+        if (!leavingUser) {
+            return res.status(204);
+        } else {
+            const result = await User.findOneAndUpdate({ _id: leavingUser.id }, {userToken: ""});
+        }
+    } catch (err) {
+        console.log(err)
+    }
     res.clearCookie('usertoken');
     res.sendStatus(200);
 };

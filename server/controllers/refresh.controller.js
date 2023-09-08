@@ -1,15 +1,14 @@
 const User = require('../models/user.model');
-const secret = process.env.SECRET_KEY;
 const jwt = require('jsonwebtoken');
 
 const refresh = async (req, res) => {
     try {
-        const cookie = req.cookies["usertoken"];
-        if (!cookie?.jwt) {
-            return res.sendStatus(401);
+        const token = req.cookies['usertoken'];
+        console.log(token)
+        if (!token) {
+            return res.json({ id: 0, role: "User" })
         };
-        const token = cookie.jwt;
-        const foundUser = await User.findOne({ userToken: token }).exec();
+        const foundUser = await User.findOne({ userToken: token });
         if (!foundUser) {
             jwt.verify(
                 token,
@@ -17,7 +16,7 @@ const refresh = async (req, res) => {
                 async (err, decoded) => {
                     if (err) return res.sendStatus(403); //Forbidden
                     // Delete token of hacked user
-                    const hackedUser = await User.findOne({ _id: decoded.id }).exec();
+                    const hackedUser = await User.findOne({ _id: decoded.id });
                     const result = await User.findOneAndUpdate({ _id: hackedUser.id }, {userToken: ""});
                 }
             )
@@ -32,7 +31,8 @@ const refresh = async (req, res) => {
                 };
             }
         )
-        res.json({ userToken })
+        
+        res.json({ id: foundUser.id, role: foundUser.role })
     } catch (err) {
         console.log(err);
     };
