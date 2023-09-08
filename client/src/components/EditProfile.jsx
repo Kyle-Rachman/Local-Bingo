@@ -21,7 +21,7 @@ const EditProfile = (props) => {
             setFunFact(data.funFact);
             setLoaded(true);
             if (currentUser.id != _id) {
-                navigate(-1)
+                navigate("/profile/" + _id)
             }
         }
         fetchUserInfo().catch((err) => console.log(err));

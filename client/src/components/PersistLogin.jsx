@@ -26,11 +26,6 @@ const PersistLogin = () => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`user: ${currentUser.id}`)
-    })
-
     return (
         <>
             {
