@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const refresh = async (req, res) => {
     try {
         const token = req.cookies['usertoken'];
-        console.log(token)
         if (!token) {
             return res.json({ id: 0, role: "User" })
         };
@@ -14,7 +13,9 @@ const refresh = async (req, res) => {
                 token,
                 process.env.SECRET_KEY,
                 async (err, decoded) => {
-                    if (err) return res.sendStatus(403); //Forbidden
+                    if (err) {
+                        return res.sendStatus(403); //Forbidden
+                    }
                     // Delete token of hacked user
                     const hackedUser = await User.findOne({ _id: decoded.id });
                     const result = await User.findOneAndUpdate({ _id: hackedUser.id }, {userToken: ""});
@@ -31,7 +32,6 @@ const refresh = async (req, res) => {
                 };
             }
         )
-        
         res.json({ id: foundUser.id, role: foundUser.role })
     } catch (err) {
         console.log(err);

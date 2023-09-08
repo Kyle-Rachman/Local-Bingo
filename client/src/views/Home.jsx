@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import UserForm from "../components/UserForm";
+import UserForm from "../components/UserForm/UserForm";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
+import styles from "./Home.module.css";
+import { Button } from "@mui/material";
 
 const Home = (props) => {
     const [registerErrors, setRegisterErrors] = useState([]);
     const [loginError, setLoginError] = useState("");
+    const [newUser, setNewUser] = useState(false);
     const {currentUser, setCurrentUser} = useContext(UserContext);
     const navigate = useNavigate();
     const registerUser = async (userParam) => {
@@ -19,7 +22,7 @@ const Home = (props) => {
             setRegisterErrors([]);
             navigate('/game');
         } catch(err) {
-            if (err.response.data.message) {
+            if (err.response.data.message == "User already exists") {
                 setRegisterErrors(["This user already exists!"]);
             } else{
                 let errorArr = []
@@ -46,28 +49,55 @@ const Home = (props) => {
             }
         };
     };
+
+    const toggleForm = () => {
+        setNewUser(prev => !prev);
+        setRegisterErrors([]);
+        setLoginError("");
+    }
+
     return (
         <>
-            <h2>Register</h2>
-            <UserForm onSubmitProp={registerUser} type="register"/>
-            <div className="errors">
-                {registerErrors.map((err, index) => (
-                        <p key={index}>{err}</p>
-                    ))}
+            <div className={styles.wrapper}>
+                <h1>Local Bingo!</h1>
+                <br />
+                <div className={styles.forms}>
+                    {
+                        newUser && <div className={styles.userform} id={styles.register}>
+                            <h2>Sign Up</h2>
+                            <UserForm onSubmitProp={registerUser} type="register"/>
+                            <div className={styles.errors}>
+                                {registerErrors.map((err, index) => (
+                                        <p key={index}>{err}</p>
+                                    ))}
+                            </div>
+                        </div>
+                    }
+                    {
+                        !newUser && <div className={styles.userform} id={styles.login}>
+                            <h2>Login</h2>
+                            <UserForm onSubmitProp={loginUser} type="login"/>
+                            <div className={styles.errors}>
+                                <p>{loginError}</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <p className={styles.changeform} onClick={toggleForm}>
+                    {
+                        !newUser ?
+                        "Need an account? Sign up!" :
+                        "Already have an account? Log in here"
+                    }
+                </p>
+                <Button variant="outlined" onClick={() => {
+                    setCurrentUser({
+                        id: 0,
+                        role: "User"
+                    })
+                    navigate("/game");
+                    }}>Play as guest</Button>
             </div>
-            <hr />
-            <h2>Login</h2>
-            <UserForm onSubmitProp={loginUser} type="login"/>
-            <div className="errors">
-                <p>{loginError}</p>
-            </div>
-            <button onClick={() => {
-                setCurrentUser({
-                    id: 0,
-                    role: "User"
-                })
-                navigate("/game");
-                }}>Play as guest</button>
         </>
     );
 };

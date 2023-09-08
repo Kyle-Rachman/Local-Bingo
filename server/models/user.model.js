@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     lastInitial: {
         type: String,
         required: [true, "Last initial is required"],
-        maxLength: [2, "Just the initial! You can add another character to help distinguish people if necessary."]
+        maxLength: [2, "Just the last initial!\n Two if necessary."]
     },
     password: {
         type: String,

@@ -10,26 +10,39 @@ import EditProfile from './components/EditProfile';
 import Admin from './components/Admin';
 import UserContext from './UserContext';
 import PersistLogin from './components/PersistLogin';
+import { grey } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: grey[50],
+    },
+  },
+});
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState({})
   return (
     <>
-      <UserContext.Provider value={{currentUser, setCurrentUser}}>
-        <BrowserRouter>
-          <Routes>
-            <Route exact path='/' element={<Home />}></Route>
-            <Route element = {<PersistLogin/>}>
-              <Route exact path='/game' element={<Board />}></Route>
-              <Route exact path='/prompts' element={<PromptsView />}></Route>
-              <Route exact path='/profile/:_id' element={<UserProfile />}></Route>
-              <Route exact path='/profile/:_id/edit' element={<EditProfile />}></Route>
-              <Route exact path='/leaderboard' element={<Leaderboard />}></Route>
-              <Route exact path='/admin' element={<Admin />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
+      <ThemeProvider theme={theme}>
+        <UserContext.Provider value={{currentUser, setCurrentUser}}>
+          <BrowserRouter>
+            <Routes>
+              <Route exact path='/' element={<Home />}></Route>
+              <Route element = {<PersistLogin/>}>
+                <Route exact path='/game' element={<Board />}></Route>
+                <Route exact path='/prompts' element={<PromptsView />}></Route>
+                <Route exact path='/profile/:_id' element={<UserProfile />}></Route>
+                <Route exact path='/profile/:_id/edit' element={<EditProfile />}></Route>
+                <Route exact path='/leaderboard' element={<Leaderboard />}></Route>
+                <Route exact path='/admin' element={<Admin />}></Route>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </UserContext.Provider>
+      </ThemeProvider>
     </>
   );
 };

@@ -1,0 +1,39 @@
+.wrapper {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.forms {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.userform {
+    padding: 15px 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#register {
+    background-color: rgba(84, 136, 215, 0.6);
+}
+
+#login {
+    background-color: rgba(58,94,70,0.6);
+}
+
+.changeform {
+    text-decoration: underline;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.errors {
+    max-width: 100%
+}
