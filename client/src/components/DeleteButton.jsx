@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const DeleteButton = (props) => {
     const {itemId, type, successCallback} = props;
@@ -12,7 +13,7 @@ const DeleteButton = (props) => {
         }
     };
     return (
-        <button onClick={deleteItem}>Delete</button>
+        <Button variant="outlined" color="error" onClick={deleteItem} style={{margin: "10px"}}>Delete</Button>
     );
 };
 

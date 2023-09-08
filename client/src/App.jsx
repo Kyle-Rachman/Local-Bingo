@@ -7,7 +7,7 @@ import Board from './components/Board/Board';
 import Leaderboard from './components/Leaderboard/Leaderboard';
 import UserProfile from './components/UserProfile';
 import EditProfile from './components/EditProfile';
-import Admin from './components/Admin';
+import Admin from './components/AdminComponent/Admin';
 import UserContext from './UserContext';
 import PersistLogin from './components/PersistLogin';
 import { grey } from '@mui/material/colors';

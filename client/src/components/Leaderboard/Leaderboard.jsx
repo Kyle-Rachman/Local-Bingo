@@ -45,9 +45,9 @@ const Leaderboard = (props) => {
         <>
             <div className={styles.wrapper}>
                 <h1>Leaderboard:</h1>
-                <TableContainer style={{maxHeight: "250px"}}>
+                <TableContainer style={{maxHeight: "350px"}}>
                     <Table stickyHeader style={{margin: "0 auto"}}>
-                        <TableHead >
+                        <TableHead>
                             <TableRow>
                                 <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
                                     <div className={styles.headcell}>
