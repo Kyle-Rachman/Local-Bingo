@@ -71,69 +71,69 @@ const Admin = (props) => {
 
     return (
         <>
-        <div className={styles.wrapper}>
-            <h1>Admin Console:</h1>
-            <TableContainer style={{maxHeight: "350px"}}>
-                <Table stickyHeader style={{margin: "0 auto"}}>
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
-                                <div className={styles.headcell}>
-                                    Name
-                                    <div className="buttons">
-                                        <Button onClick={() => sortUsers("firstName","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
-                                        <Button onClick={() => sortUsers("firstName","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
-                                    </div>
-                                </div>
-                            </StyledTableCell>
-                            <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
-                                <div className={styles.headcell}>
-                                    Role
-                                    <div>
-                                        <Button onClick={() => sortUsers("role","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
-                                        <Button onClick={() => sortUsers("role","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
-                                    </div>
-                                </div>
-                            </StyledTableCell>
-                            <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
-                                <div className={styles.headcell}>
-                                    Actions
-                                </div>
-                            </StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody style={{margin: "0 auto"}}> 
-                    {
-                        users.map(user => {
-                            return (
-                                <TableRow key = {user._id}>
-                                    <StyledTableCell><Link to={"/profile/"+user._id}> {user.firstName} {user.lastInitial}</Link></StyledTableCell>
-                                    <StyledTableCell>{user.role}</StyledTableCell>
-                                    <StyledTableCell>
-                                        <div className={styles.actions}>
-                                            <Button variant="outlined" onClick={() => changeUserRole(user.role, user._id)}>
-                                                {
-                                                    (user.role == "User") ?
-                                                    "Promote" :
-                                                    "Demote"
-                                                }
-                                            </Button>
-                                            {
-                                                (user.role != "Admin") ?
-                                                <DeleteButton itemId={user._id} type={"users"} successCallback={() => removeFromDOM(user._id)}/> :
-                                                ""
-                                            }
+            <div className={styles.wrapper}>
+                <h1>Admin Console:</h1>
+                <TableContainer style={{maxHeight: "350px"}}>
+                    <Table stickyHeader style={{margin: "0 auto"}}>
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                    <div className={styles.headcell}>
+                                        Name
+                                        <div className="buttons">
+                                            <Button onClick={() => sortUsers("firstName","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
+                                            <Button onClick={() => sortUsers("firstName","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>
-                                    </StyledTableCell>
-                                </TableRow>
-                            );
-                        })
-                    }
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <LogoutButton></LogoutButton>
-        </div>
+                                    </div>
+                                </StyledTableCell>
+                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                    <div className={styles.headcell}>
+                                        Role
+                                        <div>
+                                            <Button onClick={() => sortUsers("role","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
+                                            <Button onClick={() => sortUsers("role","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
+                                        </div>
+                                    </div>
+                                </StyledTableCell>
+                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                    <div className={styles.headcell}>
+                                        Actions
+                                    </div>
+                                </StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody style={{margin: "0 auto"}}> 
+                        {
+                            users.map(user => {
+                                return (
+                                    <TableRow key = {user._id}>
+                                        <StyledTableCell><Link to={"/profile/"+user._id}> {user.firstName} {user.lastInitial}</Link></StyledTableCell>
+                                        <StyledTableCell>{user.role}</StyledTableCell>
+                                        <StyledTableCell>
+                                            <div className={styles.actions}>
+                                                <Button variant="outlined" onClick={() => changeUserRole(user.role, user._id)}>
+                                                    {
+                                                        (user.role == "User") ?
+                                                        "Promote" :
+                                                        "Demote"
+                                                    }
+                                                </Button>
+                                                {
+                                                    (user.role != "Admin") ?
+                                                    <DeleteButton itemId={user._id} type={"users"} successCallback={() => removeFromDOM(user._id)}/> :
+                                                    ""
+                                                }
+                                            </div>
+                                        </StyledTableCell>
+                                    </TableRow>
+                                );
+                            })
+                        }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <LogoutButton></LogoutButton>
+            </div>
         </>
     );
 };
