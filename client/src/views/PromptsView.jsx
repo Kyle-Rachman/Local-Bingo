@@ -14,6 +14,12 @@ const listStyle = {
     textAlign: "left"
 };
 
+const grad = {
+    background: "linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6))",
+    borderRadius: "25px",
+    padding: "20px"
+}
+
 const PromptsView = (props) => {
     const [prompts, setPrompts] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -56,7 +62,7 @@ const PromptsView = (props) => {
         };
     };
     return (
-        <>
+        <div style={grad}>
             <div style={{textAlign: "right"}}>
                 <LogoutButton></LogoutButton>
             </div>
@@ -71,16 +77,16 @@ const PromptsView = (props) => {
                             ))}
                     </div>
                     <br />
-                    <Link to={"/game"}>To Board</Link>
+                    <Link to={"/game"} style={{color: "white"}}>Back To Board</Link>
                     <br /> <br />
                     <hr/>
                     <PromptList prompts={prompts} removeFromDOM={removeFromDOM}/>
                 </> :
                 <>
-                    <h1>All Possible Squares:</h1>
-                    <Link to={"/game"}>To Board</Link>
+                    <Link to={"/game"} style={{color: "white"}}>Back To Board</Link>
                     <br /> <br />
                     <hr/>
+                    <h1>All Possible Squares:</h1>
                     <br />
                     <div style={listStyle}>
                     {
@@ -91,7 +97,7 @@ const PromptsView = (props) => {
                     </div>
                 </>
             }
-        </>
+        </div>
     );
 };
 

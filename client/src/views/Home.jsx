@@ -57,7 +57,7 @@ const Home = (props) => {
     }
 
     return (
-        <>
+        <div className={styles.grad}>
             <div className={styles.wrapper}>
                 <h1>Local Bingo!</h1>
                 <br />
@@ -98,7 +98,7 @@ const Home = (props) => {
                     navigate("/game");
                     }}>Play as guest</Button>
             </div>
-        </>
+        </div>
     );
 };
 

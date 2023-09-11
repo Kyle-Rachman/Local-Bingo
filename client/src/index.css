@@ -1,3 +1,17 @@
+html {
+  min-height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: -webkit-linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+  background: -moz-linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+  background: -ms-linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+  background: -o-linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+  background: linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

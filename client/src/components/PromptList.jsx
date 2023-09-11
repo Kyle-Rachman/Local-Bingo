@@ -21,7 +21,8 @@ const PromptList = (props) => {
                     prompts.map(prompt => {
                         return (
                             <p key = {prompt._id}>
-                                <InlineEdit initialValue={prompt.text} promptId={prompt._id}/> | <DeleteButton itemId={prompt._id} type={"prompts"} successCallback={() => removeFromDOM(prompt._id)}/>
+                                <InlineEdit initialValue={prompt.text} promptId={prompt._id}/>
+                                <DeleteButton itemId={prompt._id} type={"prompts"} successCallback={() => removeFromDOM(prompt._id)}/>
                             </p>
                         );
                     })

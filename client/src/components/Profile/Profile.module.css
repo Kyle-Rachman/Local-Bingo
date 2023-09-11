@@ -1,0 +1,25 @@
+.grad {
+    background: linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+@media only screen and (max-width: 600px){
+    .buttons {
+        flex-direction: column;
+    }
+}
+
+.field {
+    border: 1px inset white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 0px 5px;
+}

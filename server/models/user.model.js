@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     funFact: {
         type: String,
         default: "",
-        validate: [factValidator, "Your fun fact must either be blank or have 5+ characters!"]
+        validate: [factValidator, "Your fun fact must either be blank or have between 5 and 100 characters!"]
     },
     role: {
         type: String,
@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 function factValidator(fact) {
-    return (fact.length == 0 || fact.length >= 5);
+    return (fact.length == 0 || (fact.length >= 5 && fact.length <= 100));
 }
 
 UserSchema.pre('save', async function(next) {

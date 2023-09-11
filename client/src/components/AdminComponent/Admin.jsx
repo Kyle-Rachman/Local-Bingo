@@ -70,14 +70,14 @@ const Admin = (props) => {
     };
 
     return (
-        <>
+        <div className={styles.grad}>
             <div className={styles.wrapper}>
                 <h1>Admin Console:</h1>
                 <TableContainer style={{maxHeight: "350px"}}>
                     <Table stickyHeader style={{margin: "0 auto"}}>
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Name
                                         <div className="buttons">
@@ -86,7 +86,7 @@ const Admin = (props) => {
                                         </div>
                                     </div>
                                 </StyledTableCell>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Role
                                         <div>
@@ -95,7 +95,7 @@ const Admin = (props) => {
                                         </div>
                                     </div>
                                 </StyledTableCell>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Actions
                                     </div>
@@ -107,7 +107,7 @@ const Admin = (props) => {
                             users.map(user => {
                                 return (
                                     <TableRow key = {user._id}>
-                                        <StyledTableCell><Link to={"/profile/"+user._id}> {user.firstName} {user.lastInitial}</Link></StyledTableCell>
+                                        <StyledTableCell><Link style={{color: "white"}} to={"/profile/"+user._id}> {user.firstName} {user.lastInitial}</Link></StyledTableCell>
                                         <StyledTableCell>{user.role}</StyledTableCell>
                                         <StyledTableCell>
                                             <div className={styles.actions}>
@@ -132,9 +132,10 @@ const Admin = (props) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <br />
                 <LogoutButton></LogoutButton>
             </div>
-        </>
+        </div>
     );
 };
 

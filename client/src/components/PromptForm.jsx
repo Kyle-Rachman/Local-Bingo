@@ -1,4 +1,14 @@
 import React, { useState } from "react";
+import { Button, FormControl, Input, InputLabel} from "@mui/material";
+
+const field = {
+    border: "1px inset white",
+    borderRadius: "5px",
+    marginBottom: "20px",
+    color: 'white',
+    marginBottom: "10px",
+    padding: "0px 2px"
+}
 
 const PromptForm = (props) => {
     const {initialText, onSubmitProp} = props;
@@ -15,11 +25,13 @@ const PromptForm = (props) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div>
-                        <label htmlFor="text" style={{color: 'white'}}>Text: </label>
-                        <input type="text" id="text" value={text} style={{color: 'white'}} onChange={(e) => setText(e.target.value)}/>
+                        <FormControl>
+                            <InputLabel htmlFor="text" style={{color: 'white', marginTop: "5px"}}>Text:</InputLabel>
+                            <Input type="text" id="text" value={text} style={field} onChange={(e) => setText(e.target.value)} />
+                        </FormControl>
                     </div>
                 </div>
-                <button type="submit">Submit</button>
+                <Button variant="outlined" type="submit" style={{marginBottom: "5px"}}>Add Square</Button>
             </form>
         </>
     );

@@ -1,3 +1,9 @@
+.grad {
+    background: linear-gradient(to bottom right, rgba(84, 136, 215, 0.6), rgba(58,94,70,0.6));
+    border-radius: 25px;
+    padding: 20px;
+}
+
 .wrapper {
     margin: 0 auto;
     max-width: 500px;

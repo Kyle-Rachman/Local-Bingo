@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import UserContext from "../UserContext";
+import UserContext from "../../UserContext";
+import styles from "./Profile.module.css";
+import { Button, FormControl, Input, InputLabel} from "@mui/material";
 
 const EditProfile = (props) => {
     const {_id} = useParams();
@@ -50,25 +52,29 @@ const EditProfile = (props) => {
     };
 
     return (
-        <>
+        <div className={styles.grad}>
             <h1>Edit Profile Information</h1>
             {
                 loaded && <form onSubmit={handleSubmit}>
-                    <div className="formInput">
-                        <label htmlFor="firstName" style={{color: 'white'}}>First Name: </label>
-                        <input type="text" id="firstName" value={firstName} style={{color: 'white'}} onChange={(e) => setFirstName(e.target.value)}/>
+                    <div>
+                        <FormControl>
+                            <InputLabel htmlFor="firstName" style={{color: "white"}}>First Name: </InputLabel>
+                            <Input className={styles.field} style={{color: "white"}} type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                        </FormControl>
+                        <br />
+                        <FormControl>
+                            <InputLabel htmlFor="lastInitial" style={{color: "white"}}>Last Initial: </InputLabel>
+                            <Input className={styles.field} style={{color: "white"}} type="text" id="lastInitial" value={lastInitial} onChange={(e) => setLastInitial(e.target.value)}/>
+                        </FormControl>
+                        <br />
+                        <FormControl>
+                            <InputLabel htmlFor="funFact" style={{color: "white"}}>Fun Fact: </InputLabel>
+                            <Input multiline className={styles.field} style={{color: "white", width: "205px", padding: "2px"}} type="text" id="funFact" value={funFact} onChange={(e) => setFunFact(e.target.value)}/>
+                        </FormControl>
                     </div>
-                    <div className="formInput">
-                        <label htmlFor="lastInitial" style={{color: 'white'}}>Last Initial: </label>
-                        <input type="text" id="lastInitial" value={lastInitial} style={{color: 'white'}} onChange={(e) => setLastInitial(e.target.value)}/>
-                    </div>
-                    <div className="formInput">
-                        <label htmlFor="funFact" style={{color: 'white'}}>Fun Fact: </label>
-                        <input type="text" id="funFact" value={funFact} style={{color: 'white'}} onChange={(e) => setFunFact(e.target.value)}/>
-                    </div>
-                    <div className="formInput">
-                        <button type="submit">Submit</button>
-                        <button onClick={() => navigate("/profile/" + _id)}>Cancel</button>
+                    <div className={styles.buttons}>
+                        <Button variant="outlined" type="submit">Update Profile</Button>
+                        <Button variant="outlined" onClick={() => navigate("/profile/" + _id)}>Cancel</Button>
                     </div>
                 </form>
             }
@@ -79,7 +85,7 @@ const EditProfile = (props) => {
                     ))
                 }
             </div>
-        </>
+        </div>
     );
 };
 

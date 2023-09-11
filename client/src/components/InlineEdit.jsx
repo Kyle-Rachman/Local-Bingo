@@ -32,7 +32,7 @@ const InlineEdit = (props) => {
         {
             text ?
             <textarea
-            cols={100}
+            cols={50}
             rows={1}
             aria-label="Text"
             value={text}
@@ -40,7 +40,7 @@ const InlineEdit = (props) => {
             style={promptStyle}
             /> :
             <textarea
-                cols={100}
+                cols={50}
                 rows={1}
                 aria-label="Text"
                 placeholder="You need at least one character of text!"

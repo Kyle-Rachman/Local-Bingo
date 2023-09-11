@@ -99,7 +99,7 @@ const Board = (props) => {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${styles.grad}`}>
             <table className={styles.board}>
                 <tbody>
                     <tr>

@@ -11,7 +11,7 @@ import styles from "./Leaderboard.module.css";
 
 const StyledTableCell = styled(TableCell)({
     color: "white",
-    maxWidth: "10vw",
+    maxWidth: "5vw",
     textAlign: "center",
     verticalAlign: "top",
     background: "none"
@@ -42,14 +42,14 @@ const Leaderboard = (props) => {
     };
 
     return (
-        <>
+        <div className={styles.grad}>
             <div className={styles.wrapper}>
                 <h1>Leaderboard:</h1>
                 <TableContainer style={{maxHeight: "350px"}}>
                     <Table stickyHeader style={{margin: "0 auto"}}>
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Name
                                         <div className="buttons">
@@ -58,7 +58,7 @@ const Leaderboard = (props) => {
                                         </div>
                                     </div>
                                 </StyledTableCell>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Number of Bingos
                                         <div className="buttons">
@@ -67,7 +67,7 @@ const Leaderboard = (props) => {
                                         </div>
                                     </div>
                                 </StyledTableCell>
-                                <StyledTableCell style={{backgroundColor: "rgb(64,95,145)"}}>
+                                <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Most Recent Bingo
                                         <div className="buttons">
@@ -104,7 +104,7 @@ const Leaderboard = (props) => {
                 </div>
                 <LogoutButton></LogoutButton>
             </div>
-        </>
+        </div>
     );
 };
 
