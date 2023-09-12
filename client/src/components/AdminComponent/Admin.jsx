@@ -80,7 +80,7 @@ const Admin = (props) => {
                                 <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Name
-                                        <div className="buttons">
+                                        <div className={styles.sortButtons}>
                                             <Button onClick={() => sortUsers("firstName","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
                                             <Button onClick={() => sortUsers("firstName","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>
@@ -89,7 +89,7 @@ const Admin = (props) => {
                                 <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Role
-                                        <div>
+                                        <div className={styles.sortButtons}>
                                             <Button onClick={() => sortUsers("role","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
                                             <Button onClick={() => sortUsers("role","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>

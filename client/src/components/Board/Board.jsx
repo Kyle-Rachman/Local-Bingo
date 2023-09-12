@@ -100,63 +100,32 @@ const Board = (props) => {
 
     return (
         <div className={`${styles.container} ${styles.grad}`}>
-            <table className={styles.board}>
-                <tbody>
-                    <tr>
-                        <Square text={prompts[0]} isActive={activeSquares[0][0]} handleClick={() => toggleActive(0,0)}></Square>
-                        <Square text={prompts[1]} isActive={activeSquares[0][1]} handleClick={() => toggleActive(0,1)}></Square>
-                        <Square text={prompts[2]} isActive={activeSquares[0][2]} handleClick={() => toggleActive(0,2)}></Square>
-                        <Square text={prompts[3]} isActive={activeSquares[0][3]} handleClick={() => toggleActive(0,3)}></Square>
-                        <Square text={prompts[4]} isActive={activeSquares[0][4]} handleClick={() => toggleActive(0,4)}></Square>
-                    </tr>
-                    <tr>
-                        <Square text={prompts[5]} isActive={activeSquares[1][0]} handleClick={() => toggleActive(1,0)}></Square>
-                        <Square text={prompts[6]} isActive={activeSquares[1][1]} handleClick={() => toggleActive(1,1)}></Square>
-                        <Square text={prompts[7]} isActive={activeSquares[1][2]} handleClick={() => toggleActive(1,2)}></Square>
-                        <Square text={prompts[8]} isActive={activeSquares[1][3]} handleClick={() => toggleActive(1,3)}></Square>
-                        <Square text={prompts[9]} isActive={activeSquares[1][4]} handleClick={() => toggleActive(1,4)}></Square>
-                    </tr>
-                    <tr>
-                        <Square text={prompts[10]} isActive={activeSquares[2][0]} handleClick={() => toggleActive(2,0)}></Square>
-                        <Square text={prompts[11]} isActive={activeSquares[2][1]} handleClick={() => toggleActive(2,1)}></Square>
-                        <Square text={"God is at the center"} isActive={activeSquares[2][2]} handleClick={() => toggleActive(2,2)}></Square>
-                        <Square text={prompts[12]} isActive={activeSquares[2][3]} handleClick={() => toggleActive(2,3)}></Square>
-                        <Square text={prompts[13]} isActive={activeSquares[2][4]} handleClick={() => toggleActive(2,4)}></Square>
-                    </tr>
-                    <tr>
-                        <Square text={prompts[14]} isActive={activeSquares[3][0]} handleClick={() => toggleActive(3,0)}></Square>
-                        <Square text={prompts[15]} isActive={activeSquares[3][1]} handleClick={() => toggleActive(3,1)}></Square>
-                        <Square text={prompts[16]} isActive={activeSquares[3][2]} handleClick={() => toggleActive(3,2)}></Square>
-                        <Square text={prompts[17]} isActive={activeSquares[3][3]} handleClick={() => toggleActive(3,3)}></Square>
-                        <Square text={prompts[18]} isActive={activeSquares[3][4]} handleClick={() => toggleActive(3,4)}></Square>
-                    </tr>
-                    <tr>
-                        <Square text={prompts[19]} isActive={activeSquares[4][0]} handleClick={() => toggleActive(4,0)}></Square>
-                        <Square text={prompts[20]} isActive={activeSquares[4][1]} handleClick={() => toggleActive(4,1)}></Square>
-                        <Square text={prompts[21]} isActive={activeSquares[4][2]} handleClick={() => toggleActive(4,2)}></Square>
-                        <Square text={prompts[22]} isActive={activeSquares[4][3]} handleClick={() => toggleActive(4,3)}></Square>
-                        <Square text={prompts[23]} isActive={activeSquares[4][4]} handleClick={() => toggleActive(4,4)}></Square>
-                    </tr>
-                </tbody>
-            </table>
-            <div className={styles.buttons}>
-                <Button variant="outlined" onClick={() => {
-                    setLoaded(false);
-                    setActiveSquares(
-                                    [[0,0,0,0,0],
-                                    [0,0,0,0,0],
-                                    [0,0,0,0,0],
-                                    [0,0,0,0,0],
-                                    [0,0,0,0,0]]);
-                    }}>Reload Board</Button>
-                <Button variant="outlined" onClick={() => navigate('/prompts')}>Square List</Button>
-                <Button variant="outlined" onClick={() => navigate('/leaderboard')}>Leaderboard</Button>
-                {
-                    currentUser.id != 0 ?
-                    <Button variant="outlined" onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</Button> :
-                    ""
-                }
-                <LogoutButton></LogoutButton>
+            <div className={styles.board}>
+                <Square text={prompts[0]} isActive={activeSquares[0][0]} handleClick={() => toggleActive(0,0)}></Square>
+                <Square text={prompts[1]} isActive={activeSquares[0][1]} handleClick={() => toggleActive(0,1)}></Square>
+                <Square text={prompts[2]} isActive={activeSquares[0][2]} handleClick={() => toggleActive(0,2)}></Square>
+                <Square text={prompts[3]} isActive={activeSquares[0][3]} handleClick={() => toggleActive(0,3)}></Square>
+                <Square text={prompts[4]} isActive={activeSquares[0][4]} handleClick={() => toggleActive(0,4)}></Square>
+                <Square text={prompts[5]} isActive={activeSquares[1][0]} handleClick={() => toggleActive(1,0)}></Square>
+                <Square text={prompts[6]} isActive={activeSquares[1][1]} handleClick={() => toggleActive(1,1)}></Square>
+                <Square text={prompts[7]} isActive={activeSquares[1][2]} handleClick={() => toggleActive(1,2)}></Square>
+                <Square text={prompts[8]} isActive={activeSquares[1][3]} handleClick={() => toggleActive(1,3)}></Square>
+                <Square text={prompts[9]} isActive={activeSquares[1][4]} handleClick={() => toggleActive(1,4)}></Square>
+                <Square text={prompts[10]} isActive={activeSquares[2][0]} handleClick={() => toggleActive(2,0)}></Square>
+                <Square text={prompts[11]} isActive={activeSquares[2][1]} handleClick={() => toggleActive(2,1)}></Square>
+                <Square text={"God is at the center"} isActive={activeSquares[2][2]} handleClick={() => toggleActive(2,2)}></Square>
+                <Square text={prompts[12]} isActive={activeSquares[2][3]} handleClick={() => toggleActive(2,3)}></Square>
+                <Square text={prompts[13]} isActive={activeSquares[2][4]} handleClick={() => toggleActive(2,4)}></Square>
+                <Square text={prompts[14]} isActive={activeSquares[3][0]} handleClick={() => toggleActive(3,0)}></Square>
+                <Square text={prompts[15]} isActive={activeSquares[3][1]} handleClick={() => toggleActive(3,1)}></Square>
+                <Square text={prompts[16]} isActive={activeSquares[3][2]} handleClick={() => toggleActive(3,2)}></Square>
+                <Square text={prompts[17]} isActive={activeSquares[3][3]} handleClick={() => toggleActive(3,3)}></Square>
+                <Square text={prompts[18]} isActive={activeSquares[3][4]} handleClick={() => toggleActive(3,4)}></Square>
+                <Square text={prompts[19]} isActive={activeSquares[4][0]} handleClick={() => toggleActive(4,0)}></Square>
+                <Square text={prompts[20]} isActive={activeSquares[4][1]} handleClick={() => toggleActive(4,1)}></Square>
+                <Square text={prompts[21]} isActive={activeSquares[4][2]} handleClick={() => toggleActive(4,2)}></Square>
+                <Square text={prompts[22]} isActive={activeSquares[4][3]} handleClick={() => toggleActive(4,3)}></Square>
+                <Square text={prompts[23]} isActive={activeSquares[4][4]} handleClick={() => toggleActive(4,4)}></Square>
             </div>
             <div className="Bingo">
                 {
@@ -169,6 +138,27 @@ const Board = (props) => {
                     "You already got Bingo this week!" :
                     ""
                 }
+            </div>
+            <div className="footer">
+                <div className={styles.buttons}>
+                    {/* <Button variant="outlined" onClick={() => {
+                        setLoaded(false);
+                        setActiveSquares(
+                            [[0,0,0,0,0],
+                                        [0,0,0,0,0],
+                                        [0,0,0,0,0],
+                                        [0,0,0,0,0],
+                                        [0,0,0,0,0]]);
+                        }}>Reload Board</Button> */}
+                    <Button variant="outlined" onClick={() => navigate('/prompts')}>Square List</Button>
+                    <Button variant="outlined" onClick={() => navigate('/leaderboard')}>Leaderboard</Button>
+                    {
+                        currentUser.id != 0 ?
+                        <Button variant="outlined" onClick={() => navigate('/profile/' + currentUser.id)}>Your Profile</Button> :
+                        ""
+                    }
+                </div>
+                <LogoutButton></LogoutButton>
             </div>
         </div>
     );

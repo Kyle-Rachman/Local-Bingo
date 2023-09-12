@@ -4,7 +4,7 @@ const PromptSchema = new mongoose.Schema({
     text: {
         type: String,
         required: [true, 'Text is required!'],
-        maxLength: [100, "That's too long!"]
+        maxLength: [45, "That's too long!"]
     }
 }, { timestamps: true });
 

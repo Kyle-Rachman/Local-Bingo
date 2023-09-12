@@ -4,14 +4,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
 import UserContext from "../../UserContext";
 import styles from "./Profile.module.css";
-import { Button, Table, TableHead, TableBody, TableRow, TableCell, TableContainer } from "@mui/material";
+import { Button, Table, TableBody, TableRow, TableCell, TableContainer } from "@mui/material";
 import { styled } from "@mui/system";
 
 const StyledTableCell = styled(TableCell)({
     color: "white",
     maxWidth: "10vw",
     verticalAlign: "top",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+    fontSize: "small"
 });
 
 const UserProfile = (props) => {
@@ -36,7 +37,7 @@ const UserProfile = (props) => {
                 <Table>
                     <TableBody> 
                         <TableRow>
-                            <StyledTableCell style={{textAlign: "left", }}>Number of Bingos</StyledTableCell>
+                            <StyledTableCell style={{textAlign: "left"}}>Number of Bingos</StyledTableCell>
                             <StyledTableCell style={{textAlign: "right"}}>{user.numBingos}</StyledTableCell>
                         </TableRow>
                         <TableRow>

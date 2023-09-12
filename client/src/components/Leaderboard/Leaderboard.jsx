@@ -52,7 +52,7 @@ const Leaderboard = (props) => {
                                 <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Name
-                                        <div className="buttons">
+                                        <div className={styles.sortButtons}>
                                             <Button onClick={() => sortLeaderboard("firstName","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
                                             <Button onClick={() => sortLeaderboard("firstName","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>
@@ -61,7 +61,7 @@ const Leaderboard = (props) => {
                                 <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Number of Bingos
-                                        <div className="buttons">
+                                        <div className={styles.sortButtons}>
                                             <Button onClick={() => sortLeaderboard("numBingos","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
                                             <Button onClick={() => sortLeaderboard("numBingos","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>
@@ -70,7 +70,7 @@ const Leaderboard = (props) => {
                                 <StyledTableCell style={{backgroundColor: "rgb(88,123,179)"}}>
                                     <div className={styles.headcell}>
                                         Most Recent Bingo
-                                        <div className="buttons">
+                                        <div className={styles.sortButtons}>
                                             <Button onClick={() => sortLeaderboard("lastWin","")}><KeyboardArrowUpIcon fontSize="small"/></Button>
                                             <Button onClick={() => sortLeaderboard("lastWin","-")}><KeyboardArrowDownIcon fontSize="small"/></Button>
                                         </div>

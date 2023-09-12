@@ -6,7 +6,6 @@
 
 .wrapper {
     margin: 0 auto;
-    min-width: 320px;
     max-width: 500px;
     display: flex;
     flex-direction: column;
@@ -25,24 +24,27 @@
     justify-content: center;
 }
 
-@media only screen and (max-width: 350px){
-    .headcell {
-        display: flex;
-        align-items: center;
-        font-size: 0.75em;
-        font-weight: bold;
-    }
-}
-
-@media only screen and (min-width: 351px) and (max-width: 600px){
-    .headcell {
-        display: flex;
-        align-items: center;
-    }
-}
-
 @media only screen and (min-width: 601px){
     .headcell {
         display: block;
+    }
+}
+
+@media only screen and (min-width: 435px) and (max-width: 600px){
+    .headcell {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 434px){
+    .headcell {
+        display: flex;
+        align-items: center;
+        font-size: 0.7em;
+        font-weight: bold;
+    }
+    .sortButtons {
+        margin-left: -25px;
     }
 }
